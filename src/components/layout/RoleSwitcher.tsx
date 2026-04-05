@@ -28,7 +28,7 @@ export function RoleSwitcher() {
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value as Role)}
-                className="min-h-11 cursor-pointer appearance-none rounded-full border border-cyan-500/20 bg-cyan-500/12 py-1 pl-7 pr-7 text-[10px] font-semibold uppercase tracking-[0.24em] text-cyan-500 outline-none ring-0 transition focus:ring-2 focus:ring-blue-500"
+                className="min-h-11 cursor-pointer appearance-none rounded-full border border-slate-200 bg-white/80 py-1 pl-7 pr-7 text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-700 outline-none ring-0 transition focus:ring-2 focus:ring-blue-500 dark:border-[#22314A] dark:bg-[#111B2B] dark:text-slate-200"
               >
                 <option value="Viewer" className="dark:bg-slate-800">Viewer</option>
                 <option value="Admin" className="dark:bg-slate-800">Admin</option>
