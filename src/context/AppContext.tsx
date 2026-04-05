@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { Transaction, FilterState, Role } from "@/types";
 import { initialMockTransactions } from "@/data/mockData";
+import toast from "react-hot-toast";
 
 interface AppContextProps {
   transactions: Transaction[];
@@ -14,6 +15,7 @@ interface AppContextProps {
   editTransaction: (id: string, updatedTransaction: Partial<Transaction>) => void;
   deleteTransaction: (id: string) => void;
   resetFilters: () => void;
+  isLoading: boolean;
 }
 
 const defaultFilters: FilterState = {
@@ -30,6 +32,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [filters, setFiltersState] = useState<FilterState>(defaultFilters);
   const [role, setRole] = useState<Role>("Viewer");
   const [isMounted, setIsMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Basic setup from mock data as fallback
@@ -47,6 +50,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     
     setTransactions(initialData);
     setIsMounted(true);
+
+    // Simulate network delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Sync to local storage upon changes
@@ -70,16 +80,19 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       id: `tx-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
     };
     setTransactions((prev) => [newTx, ...prev].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()));
+    toast.success("Transaction added successfully");
   };
 
   const editTransaction = (id: string, updatedTransaction: Partial<Transaction>) => {
     setTransactions((prev) =>
       prev.map((tx) => (tx.id === id ? { ...tx, ...updatedTransaction } : tx))
     );
+    toast.success("Transaction updated");
   };
 
   const deleteTransaction = (id: string) => {
     setTransactions((prev) => prev.filter((tx) => tx.id !== id));
+    toast.success("Transaction deleted");
   };
 
   if (!isMounted) {
@@ -98,6 +111,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         editTransaction,
         deleteTransaction,
         resetFilters,
+        isLoading,
       }}
     >
       {children}
