@@ -89,8 +89,6 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
             );
           })}
         </nav>
-
-        <div className="pointer-events-none mt-6 h-24 rounded-t-[2rem] bg-gradient-to-t from-blue-500/10 via-blue-500/5 to-transparent" />
         <RoleSwitcher />
       </aside>
     </>
