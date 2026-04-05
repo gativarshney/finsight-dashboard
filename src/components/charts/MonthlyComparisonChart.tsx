@@ -3,9 +3,15 @@
 import { useMemo } from "react";
 import { BarChart3 } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import type { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
 import { useAppContext } from "@/context/AppContext";
 import { getMonthlyTotals, formatCurrency } from "@/lib/utils";
 import { useTheme } from "next-themes";
+
+function toTooltipNumber(value: ValueType | undefined) {
+  if (Array.isArray(value)) return Number(value[0] ?? 0);
+  return Number(value ?? 0);
+}
 
 export function MonthlyComparisonChart() {
   const { transactions } = useAppContext();
@@ -69,9 +75,9 @@ export function MonthlyComparisonChart() {
                 color: isDark ? "#f8fafc" : "#0f172a"
               }}
               cursor={{ fill: isDark ? "#0F1724" : "#EFF6FF" }}
-              formatter={(value: number, name: string) => [
-                formatCurrency(Number(value) || 0), 
-                String(name) === "Income" ? "Income" : "Expenses"
+              formatter={(value: ValueType | undefined, name: NameType | undefined) => [
+                formatCurrency(toTooltipNumber(value)), 
+                String(name ?? "") === "Income" ? "Income" : "Expenses"
               ]}
               labelStyle={{ color: textColor, fontWeight: 500, marginBottom: "8px" }}
             />

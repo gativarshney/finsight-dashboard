@@ -3,9 +3,15 @@
 import { useMemo } from "react";
 import { Activity } from "lucide-react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import type { ValueType } from "recharts/types/component/DefaultTooltipContent";
 import { useAppContext } from "@/context/AppContext";
 import { getMonthlyTotals, formatCurrency } from "@/lib/utils";
 import { useTheme } from "next-themes";
+
+function toTooltipNumber(value: ValueType | undefined) {
+  if (Array.isArray(value)) return Number(value[0] ?? 0);
+  return Number(value ?? 0);
+}
 
 export function BalanceTrendChart() {
   const { transactions } = useAppContext();
@@ -72,7 +78,7 @@ export function BalanceTrendChart() {
                 boxShadow: "0 16px 40px rgba(15, 23, 42, 0.18)",
                 color: isDark ? "#f8fafc" : "#0f172a"
               }}
-              formatter={(value: number) => [formatCurrency(Number(value) || 0), "Balance"]}
+              formatter={(value: ValueType | undefined) => [formatCurrency(toTooltipNumber(value)), "Balance"]}
               itemStyle={{ color: strokeColor, fontWeight: 600 }}
             />
             <Area

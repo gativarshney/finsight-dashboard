@@ -3,12 +3,18 @@
 import { useMemo } from "react";
 import { PieChart as PieChartIcon } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import type { ValueType } from "recharts/types/component/DefaultTooltipContent";
 import { useAppContext } from "@/context/AppContext";
 import { groupByCategory, formatCurrency } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import { subMonths, isAfter } from "date-fns";
 
 const COLORS = ["#3B82F6", "#06B6D4", "#8B5CF6", "#F59E0B", "#10B981", "#EF4444", "#EC4899", "#14B8A6"];
+
+function toTooltipNumber(value: ValueType | undefined) {
+  if (Array.isArray(value)) return Number(value[0] ?? 0);
+  return Number(value ?? 0);
+}
 
 export function SpendingBreakdownChart() {
   const { transactions } = useAppContext();
@@ -96,7 +102,7 @@ export function SpendingBreakdownChart() {
                   color: isDark ? "#f8fafc" : "#0f172a"
                 }}
                 itemStyle={{ fontWeight: 600 }}
-                formatter={(value: number) => formatCurrency(Number(value) || 0)}
+                formatter={(value: ValueType | undefined) => formatCurrency(toTooltipNumber(value))}
               />
             </PieChart>
           </ResponsiveContainer>
