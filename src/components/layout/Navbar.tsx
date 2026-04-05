@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, ShieldCheck, User } from "lucide-react";
+import { Menu, ShieldCheck, User, Activity } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { usePathname } from "next/navigation";
 import { useAppContext } from "@/context/AppContext";
@@ -25,7 +25,19 @@ export function Navbar({ toggleSidebar }: { toggleSidebar: () => void }) {
         >
           <Menu className="h-6 w-6" />
         </button>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white capitalize">{title}</h1>
+        
+        {/* Mobile Logo (visible on mobile only, hidden on md and above) */}
+        <div className="md:hidden flex items-center space-x-2">
+          <div className="bg-indigo-600 p-2 rounded-lg">
+            <Activity className="h-5 w-5 text-white" />
+          </div>
+          <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-indigo-600 dark:from-indigo-400 dark:to-indigo-500">
+            FinSight
+          </span>
+        </div>
+        
+        {/* Page Title (hidden on mobile, visible on md and above) */}
+        <h1 className="hidden md:block text-2xl font-bold text-slate-900 dark:text-white capitalize">{title}</h1>
       </div>
 
       <div className="flex items-center space-x-4">

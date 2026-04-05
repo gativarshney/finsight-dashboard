@@ -179,6 +179,10 @@ export function TransactionTable() {
 
       {/* Table Section */}
       <div className="overflow-x-auto w-full">
+        {/* Swipe Hint (Mobile Only) */}
+        <div className="sm:hidden px-6 py-2 text-center text-xs text-slate-400 dark:text-slate-500">
+          ← Swipe to see more →
+        </div>
         <table className="w-full text-sm text-left">
           <thead className="text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 uppercase border-b border-slate-100 dark:border-slate-700">
             <tr>

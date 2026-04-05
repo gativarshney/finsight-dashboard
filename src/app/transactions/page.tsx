@@ -36,11 +36,11 @@ export default function TransactionsPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto w-full">
-      <header className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div className="space-y-6 max-w-7xl mx-auto w-full overflow-hidden">
+      <header className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Transactions</h2>
-          <p className="text-slate-500 dark:text-slate-400 mt-1">View and manage all your financial records.</p>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Transactions</h2>
+          <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-1">View and manage all your financial records.</p>
         </div>
         {role === "Admin" && (
           <div className="flex items-center gap-3">

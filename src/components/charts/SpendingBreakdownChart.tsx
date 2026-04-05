@@ -67,7 +67,7 @@ export function SpendingBreakdownChart() {
     <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 shadow-sm col-span-1 flex flex-col h-[400px]">
       <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6">Spending Breakdown</h3>
       
-      <div className="flex-1 flex flex-col sm:flex-row items-center w-full gap-4">
+      <div className="flex-1 flex flex-col sm:flex-row items-center w-full gap-4 overflow-hidden">
         {/* Chart */}
         <div className="w-full sm:w-1/2 h-[200px] relative shrink-0">
           <ResponsiveContainer width="100%" height="100%">
@@ -105,22 +105,22 @@ export function SpendingBreakdownChart() {
         </div>
         
         {/* Legend */}
-        <div className="w-full sm:w-1/2 flex flex-col gap-3 overflow-y-auto max-h-[200px] custom-scrollbar pr-2">
+        <div className="w-full sm:w-1/2 flex flex-col gap-3 overflow-y-auto max-h-[160px] sm:max-h-[200px] custom-scrollbar pr-2 min-w-0">
           {data.map((item, index) => {
             const percentage = ((item.value / totalExpense) * 100).toFixed(1);
             return (
-              <div key={item.name} className="flex items-center justify-between text-sm">
-                <div className="flex items-center gap-2">
+              <div key={item.name} className="flex items-center justify-between text-sm flex-shrink-0 pr-1">
+                <div className="flex items-center gap-2 min-w-0">
                   <div 
                     className="w-3 h-3 rounded-full shrink-0" 
                     style={{ backgroundColor: CATEGORY_COLORS[item.name] || COLORS[index % COLORS.length] }} 
                   />
-                  <span className="text-slate-600 dark:text-slate-400 truncate max-w-[100px]" title={item.name}>
+                  <span className="text-slate-600 dark:text-slate-400 truncate" title={item.name}>
                     {item.name}
                   </span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-slate-900 dark:text-slate-100">{percentage}%</span>
+                <div className="flex items-center gap-2 shrink-0 ml-2">
+                  <span className="font-semibold text-slate-900 dark:text-slate-100 whitespace-nowrap">{percentage}%</span>
                 </div>
               </div>
             );
