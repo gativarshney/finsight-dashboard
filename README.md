@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FinSight Dashboard
 
-## Getting Started
+Welcome to **FinSight**, a modern, production-quality finance dashboard that I built to manage and visualize mock financial data with elegance and precision.  
 
-First, run the development server:
+🔗 **Live Demo:** [Placeholder for Live Demo Link]
+
+---
+
+## 🎨 Why I Built This
+
+I set out to build a dashboard that feels like a real, premium fintech product, rather than just another tutorial project. For me, finance tools should be snappy, visually stunning, and deeply informative. I wanted to craft an experience where you could simply toggle between "Admin" and "Viewer" to see how role-based features behave dynamically in memory, and seamlessly switch themes without a jarring flash of unstyled content. 
+
+---
+
+## 🛠 Tech Stack & My Rationale
+
+- **Next.js 14+ (App Router):** I chose this because of its exceptional file-system routing and modern approach to React semantics. It keeps the architecture incredibly clean.
+- **TypeScript (Strict):** Essential for production confidence. I typed the entire codebase completely—no `any`—to ensure that data structures like `Transaction` and `Category` are reliable everywhere.
+- **Tailwind CSS:** I love styling with Tailwind because it allows me to build custom, dynamic designs right from the markup. Instead of slapping generic UI libraries on, I custom-styled everything—from the scrollbars to the responsive layout logic.
+- **Recharts:** I selected Recharts for data visualization because it integrates beautifully with React. Setting up a gradient fill on a `LineChart` and custom tooltips with Tailwind classes was straightforward and powerful.
+- **React Context API:** Since everything here relies on synchronous, mock, in-memory state, Context was the perfect lightweight solution. I avoided Redux because it was simply unnecessary overhead for this scale.
+- **Lucide-react:** Clean, consistent SVG icons.
+- **next-themes:** The only acceptable way to implement zero-flash dark mode in Next.js right now.
+
+---
+
+## ✨ Features
+
+- **Dashboard:** At-a-glance KPIs (Income, Expenses, Savings Rate), a responsive 6-month Balance Trend chart, a Spending Breakdown donut chart, and a quick list of Recent Transactions.
+- **Transactions Management:** A full-fledged table. You can search by merchant, filter by multiple categories, sort by date/amount, and paginate results.
+- **Insights Page:** I engineered a custom analytics engine that parses the transactions on the fly to give you actionable insights (like MoM change, Top Category, and Best Saving Month), visualized next to a Monthly Comparison bar chart.
+- **Role-Based Access Control (RBAC):** Switch between Viewer and Admin using the bottom-left sidebar toggle. As an Admin, you gain access to Add/Edit/Delete actions with full validation.
+- **Persistence:** Edits persist through page reloads via `localStorage` synchronization injected directly into the App Context.
+- **Theming:** Full comprehensive dark mode, utilizing a carefully selected slate/indigo palette to look sophisticated in both themes.
+
+---
+
+## 🚀 Setup & Local Execution
+
+Getting this running on your local machine is simple:
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/[your-username]/finsight-dashboard.git
+cd finsight-dashboard
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📂 Folder Structure
 
-## Learn More
+I opted for a feature-based / component-focused architecture within `src/`:
 
-To learn more about Next.js, take a look at the following resources:
+```text
+/src
+  /app
+    /dashboard         -> The main overview dashboard
+    /transactions      -> Full table and management view
+    /insights          -> Analytical charts and KPI logic
+    layout.tsx         -> Global AppShell, Providers, and Fonts
+  /components
+    /charts            -> Recharts implementations (Balance, Spending, Comparison)
+    /dashboard         -> Dashboard-specific modular pieces
+    /layout            -> Sidebar, Navbar, ThemeToggle, RoleSwitcher
+    /transactions      -> Table logic, Pagination, Modal forms
+    /insights          -> Insight metric derivations
+  /context
+    AppContext.tsx     -> Global state and localStorage synchronizer
+  /data
+    mockData.ts        -> Generates 50 realistic historical mock transactions
+  /lib
+    utils.ts           -> Core helpers: groupByCategory, getMonthlyTotals, formatCurrency
+  /types
+    index.ts           -> Shared type definitions for the entire application
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧠 State Management & Design Decisions
 
-## Deploy on Vercel
+### The State Container
+I chose to encapsulate the global state in `AppContext.tsx`. The Context holds the master list of `transactions`, the current `filters` state (which determines what the table renders), and the active `role`. 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Every time a transaction is mutated (Add/Edit/Delete), it updates the local state array. To prevent data loss on a hard refresh, I added a hydration wrapper that serializes this state to `localStorage`!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Design Aesthetics over Placeholders
+I intentionally avoided standard wireframe placeholders. The chart tooltips mimic native OS floating overlays, the sidebar has a transparent mobile-backdrop, and numerical values utilize strict `Intl.NumberFormat` output. 
+
+I used **Indigo** as the primary interactive accent, paired with **Emerald/Rose** to quickly convey positive/negative financial flows.
+
+---
+
+## 📸 Screenshots
+
+*(Add screenshots here)*
+
+- **Dashboard (Dark Mode)**
+  `![Dashboard Dark](placeholder-url-dark)`
+
+- **Transactions Table (Light Mode)**
+  `![Transactions Table](placeholder-url-light)`
+
+- **Add Transaction Modal**
+  `![Add Modal](placeholder-url-modal)`
