@@ -1,4 +1,5 @@
 import { InsightCards } from "@/components/insights/InsightCards";
+import { MonthlyComparisonChart } from "@/components/charts/MonthlyComparisonChart";
 
 export default function InsightsPage() {
   return (
@@ -11,6 +12,7 @@ export default function InsightsPage() {
       </header>
 
       <InsightCards />
+      <MonthlyComparisonChart />
     </div>
   );
 }
