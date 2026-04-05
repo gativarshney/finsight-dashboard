@@ -11,10 +11,13 @@ import {
   ArrowUpDown, 
   ArrowUp, 
   ArrowDown,
-  X
+  X,
+  Edit2,
+  Trash2
 } from "lucide-react";
 import { Transaction, Category } from "@/types";
 import { isAfter, subDays, subMonths } from "date-fns";
+import { TransactionModal } from "./TransactionModal";
 
 type SortField = "date" | "amount";
 type SortOrder = "asc" | "desc";
@@ -26,12 +29,15 @@ const ALL_CATEGORIES: Category[] = [
 ];
 
 export function TransactionTable() {
-  const { transactions, filters, setFilters, resetFilters } = useAppContext();
+  const { transactions, filters, setFilters, resetFilters, role, deleteTransaction } = useAppContext();
   
   const [sortField, setSortField] = useState<SortField>("date");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [txToEdit, setTxToEdit] = useState<Transaction | null>(null);
 
   // Toggle sort
   const handleSort = (field: SortField) => {
@@ -232,7 +238,24 @@ export function TransactionTable() {
                     {tx.type === 'income' ? '+' : '-'}{formatCurrency(tx.amount)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right">
-                    {/* Placeholder for Admin Actions to be added in Next Step */}
+                    {role === "Admin" && (
+                      <div className="flex items-center justify-end gap-2">
+                        <button
+                          onClick={() => { setTxToEdit(tx); setEditModalOpen(true); }}
+                          className="p-1.5 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 rounded-lg transition-colors"
+                          title="Edit"
+                        >
+                          <Edit2 className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => { if(confirm('Are you sure you want to delete this transaction?')) deleteTransaction(tx.id); }}
+                          className="p-1.5 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-lg transition-colors"
+                          title="Delete"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))
@@ -265,6 +288,13 @@ export function TransactionTable() {
           </div>
         </div>
       )}
+
+      {/* Edit Modal */}
+      <TransactionModal 
+        isOpen={editModalOpen} 
+        onClose={() => { setEditModalOpen(false); setTxToEdit(null); }} 
+        transactionToEdit={txToEdit} 
+      />
     </div>
   );
 }
