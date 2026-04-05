@@ -47,14 +47,14 @@ export default function TransactionsPage() {
           <div className="flex items-center gap-3">
             <button
               onClick={downloadCSV}
-              className="button-glow inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 dark:border-[#1E2D45] dark:bg-[#0D1421] dark:text-slate-300 dark:hover:bg-[#111B2B]"
+              className="button-glow inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 dark:border-[#1E2D45] dark:bg-[#0D1421] dark:text-slate-300 dark:hover:bg-[#111B2B]"
             >
               <Download className="h-4 w-4" />
               Export CSV
             </button>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="button-glow inline-flex items-center gap-2 rounded-full border border-blue-400/40 bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_34px_rgba(59,130,246,0.3)] hover:bg-blue-500"
+              className="button-glow inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-blue-400/40 bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_34px_rgba(59,130,246,0.3)] hover:bg-blue-500"
             >
               <Plus className="h-4 w-4" />
               Add Transaction

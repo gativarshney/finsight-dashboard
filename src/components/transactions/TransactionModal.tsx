@@ -97,7 +97,7 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
           <h2 className="text-xl font-semibold tracking-tight text-[var(--text-primary)]">
             {transactionToEdit ? "Edit Transaction" : "New Transaction"}
           </h2>
-          <button onClick={onClose} className="button-glow rounded-xl border border-slate-200 bg-white p-2 text-slate-400 hover:bg-slate-50 dark:border-[#1E2D45] dark:bg-[#0D1421] dark:hover:bg-[#111B2B]">
+          <button onClick={onClose} className="button-glow min-h-11 min-w-11 cursor-pointer rounded-xl border border-slate-200 bg-white p-2 text-slate-400 hover:bg-slate-50 dark:border-[#1E2D45] dark:bg-[#0D1421] dark:hover:bg-[#111B2B]">
             <X className="h-5 w-5" />
           </button>
         </div>
@@ -115,14 +115,14 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
               <button
                 type="button"
                 onClick={() => handleTypeChange("expense")}
-                className={`button-glow flex-1 rounded-xl py-2 text-sm font-semibold transition-colors ${type === "expense" ? "bg-white text-slate-900 shadow-sm dark:bg-[#0D1421] dark:text-white" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"}`}
+                className={`button-glow min-h-11 flex-1 rounded-xl py-2 text-sm font-semibold transition-colors ${type === "expense" ? "bg-white text-slate-900 shadow-sm dark:bg-[#0D1421] dark:text-white" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"}`}
               >
                 Expense
               </button>
               <button
                 type="button"
                 onClick={() => handleTypeChange("income")}
-                className={`button-glow flex-1 rounded-xl py-2 text-sm font-semibold transition-colors ${type === "income" ? "bg-white text-slate-900 shadow-sm dark:bg-[#0D1421] dark:text-white" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"}`}
+                className={`button-glow min-h-11 flex-1 rounded-xl py-2 text-sm font-semibold transition-colors ${type === "income" ? "bg-white text-slate-900 shadow-sm dark:bg-[#0D1421] dark:text-white" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"}`}
               >
                 Income
               </button>
@@ -138,7 +138,7 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
                     step="0.01"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="value-tabular w-full rounded-2xl border border-slate-200 bg-slate-50 py-2.5 pl-7 pr-4 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
+                    className="value-tabular min-h-11 w-full rounded-2xl border border-slate-200 bg-slate-50 py-2.5 pl-7 pr-4 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
                     placeholder="0.00"
                   />
                 </div>
@@ -150,7 +150,7 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
+                  className="min-h-11 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
                 />
               </div>
             </div>
@@ -160,7 +160,7 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
               <select 
                 value={category}
                 onChange={(e) => setCategory(e.target.value as Category)}
-                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
+                className="min-h-11 w-full cursor-pointer rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
               >
                 {ALL_CATEGORIES[type].map((cat) => (
                   <option key={cat} value={cat}>{cat}</option>
@@ -174,7 +174,7 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
                 type="text"
                 value={merchant}
                 onChange={(e) => setMerchant(e.target.value)}
-                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
+                className="min-h-11 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
                 placeholder="e.g. Amazon"
               />
             </div>
@@ -185,7 +185,7 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
                 type="text"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
+                className="min-h-11 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
                 placeholder="e.g. Office supplies"
               />
             </div>
@@ -197,14 +197,14 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
           <button 
             type="button" 
             onClick={onClose}
-            className="button-glow rounded-full px-5 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-[#111B2B]"
+            className="button-glow min-h-11 rounded-full px-5 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-[#111B2B]"
           >
             Cancel
           </button>
           <button 
             type="submit" 
             form="tx-form"
-            className="button-glow rounded-full border border-blue-400/40 bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_34px_rgba(59,130,246,0.3)] hover:bg-blue-500"
+            className="button-glow min-h-11 rounded-full border border-blue-400/40 bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_34px_rgba(59,130,246,0.3)] hover:bg-blue-500"
           >
             {transactionToEdit ? "Save Changes" : "Add Transaction"}
           </button>

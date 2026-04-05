@@ -81,7 +81,7 @@ export function RecentTransactions() {
         </div>
         <Link 
           href="/transactions" 
-          className="group flex items-center gap-1 text-sm font-semibold text-blue-500 transition-colors hover:text-blue-400"
+          className="group flex min-h-11 cursor-pointer items-center gap-1 text-sm font-semibold text-blue-500 transition-all hover:text-blue-400 active:scale-[0.99]"
         >
           View all 
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

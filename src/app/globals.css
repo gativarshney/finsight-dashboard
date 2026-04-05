@@ -84,9 +84,11 @@ body {
 
   .button-glow {
     box-shadow: 0 0 0 rgba(var(--accent-rgb), 0);
+    cursor: pointer;
     transition:
       box-shadow 180ms ease,
       transform 180ms ease,
+      opacity 180ms ease,
       background-color 180ms ease,
       border-color 180ms ease,
       color 180ms ease;
@@ -94,6 +96,11 @@ body {
 
   .button-glow:hover {
     box-shadow: 0 0 0 1px rgba(var(--accent-rgb), 0.08), 0 10px 24px rgba(var(--accent-rgb), 0.2);
+  }
+
+  .button-glow:active {
+    transform: scale(0.98);
+    opacity: 0.92;
   }
 
   .finsight-dot-grid {

@@ -66,7 +66,7 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 href={item.href}
                 onClick={() => window.innerWidth < 1024 && setIsOpen(false)}
                 className={cn(
-                  "group relative flex items-center gap-3 rounded-2xl px-4 py-3.5 text-sm font-medium transition-all",
+                  "group relative flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl px-4 py-3.5 text-sm font-medium transition-all active:scale-[0.99]",
                   isActive
                     ? "text-[var(--text-primary)]"
                     : "text-slate-500 hover:bg-slate-100/80 dark:text-slate-400 dark:hover:bg-white/[0.03] hover:text-slate-900 dark:hover:text-slate-100"

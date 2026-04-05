@@ -105,7 +105,7 @@ export function TransactionTable() {
 
   const getSortIcon = (field: SortField) => {
     if (sortField !== field) return <ArrowUpDown className="h-4 w-4 text-slate-400" />;
-    return sortOrder === "asc" ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />;
+    return sortOrder === "asc" ? <ArrowUp className="h-4 w-4 text-blue-500" /> : <ArrowDown className="h-4 w-4 text-blue-500" />;
   };
 
   return (
@@ -119,7 +119,7 @@ export function TransactionTable() {
               placeholder="Search merchants..."
               value={filters.search}
               onChange={(e) => { setFilters({ search: e.target.value }); setCurrentPage(1); }}
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-2.5 pl-9 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B]"
+              className="min-h-11 w-full rounded-2xl border border-slate-200 bg-slate-50 py-2.5 pl-9 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B]"
             />
           </div>
 
@@ -127,7 +127,7 @@ export function TransactionTable() {
             <select
               value={filters.type}
               onChange={(e) => { setFilters({ type: e.target.value as FilterState["type"] }); setCurrentPage(1); }}
-              className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm focus:outline-none dark:border-[#1E2D45] dark:bg-[#09101B]"
+              className="min-h-11 cursor-pointer rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B]"
             >
               <option value="All">All Types</option>
               <option value="income">Income</option>
@@ -137,7 +137,7 @@ export function TransactionTable() {
             <select
               value={filters.dateRange}
               onChange={(e) => { setFilters({ dateRange: e.target.value as FilterState["dateRange"] }); setCurrentPage(1); }}
-              className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm focus:outline-none dark:border-[#1E2D45] dark:bg-[#09101B]"
+              className="min-h-11 cursor-pointer rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B]"
             >
               <option value="All">All Time</option>
               <option value="Last 7d">Last 7 Days</option>
@@ -149,7 +149,7 @@ export function TransactionTable() {
             {(filters.search || filters.type !== "All" || filters.dateRange !== "All" || filters.categories.length > 0) && (
               <button
                 onClick={() => { resetFilters(); setCurrentPage(1); }}
-                className="button-glow rounded-xl border border-slate-200 bg-white p-2 text-slate-400 transition-colors hover:text-red-500 dark:border-[#1E2D45] dark:bg-[#0D1421]"
+                className="button-glow min-h-11 min-w-11 rounded-xl border border-slate-200 bg-white p-2 text-slate-400 transition-colors hover:text-red-500 dark:border-[#1E2D45] dark:bg-[#0D1421]"
                 title="Reset Filters"
               >
                 <X className="h-5 w-5" />
@@ -168,7 +168,7 @@ export function TransactionTable() {
               <button
                 key={cat}
                 onClick={() => toggleCategory(cat)}
-                className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                className={`min-h-11 cursor-pointer rounded-full px-3 py-1 text-xs font-medium transition-all active:scale-[0.98] ${
                   isSelected
                     ? "border border-blue-500/20 bg-blue-500/12 text-blue-500"
                     : "border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-slate-400 dark:hover:bg-[#111B2B]"
@@ -215,7 +215,7 @@ export function TransactionTable() {
               </tr>
             ) : (
               paginatedData.map((tx) => (
-                <tr key={tx.id} className="transition-colors odd:bg-transparent even:bg-slate-50/65 hover:bg-blue-500/5 dark:even:bg-white/[0.02]">
+                <tr key={tx.id} className="transition-colors odd:bg-transparent even:bg-slate-50/65 hover:bg-blue-500/5 dark:even:bg-white/[0.02] dark:hover:bg-blue-500/5">
                   <td className="whitespace-nowrap px-6 py-4 text-slate-500 dark:text-slate-400">
                     {formatDate(tx.date)}
                   </td>
@@ -249,14 +249,14 @@ export function TransactionTable() {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => { setTxToEdit(tx); setEditModalOpen(true); }}
-                          className="button-glow rounded-xl border border-transparent p-1.5 text-slate-400 transition-colors hover:border-blue-500/10 hover:bg-blue-500/10 hover:text-blue-500"
+                          className="button-glow min-h-11 min-w-11 rounded-xl border border-transparent p-1.5 text-slate-400 transition-colors hover:border-blue-500/10 hover:bg-blue-500/10 hover:text-blue-500"
                           title="Edit"
                         >
                           <Edit2 className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => { if (confirm("Are you sure you want to delete this transaction?")) deleteTransaction(tx.id); }}
-                          className="button-glow rounded-xl border border-transparent p-1.5 text-slate-400 transition-colors hover:border-red-500/10 hover:bg-red-500/10 hover:text-red-500"
+                          className="button-glow min-h-11 min-w-11 rounded-xl border border-transparent p-1.5 text-slate-400 transition-colors hover:border-red-500/10 hover:bg-red-500/10 hover:text-red-500"
                           title="Delete"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -280,14 +280,14 @@ export function TransactionTable() {
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
-              className="button-glow rounded-xl border border-slate-200 bg-white p-2 text-slate-500 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-[#1E2D45] dark:bg-[#0D1421] dark:hover:bg-[#111B2B]"
+              className="button-glow min-h-11 min-w-11 rounded-xl border border-slate-200 bg-white p-2 text-slate-500 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-[#1E2D45] dark:bg-[#0D1421] dark:hover:bg-[#111B2B]"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
             <button
               onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
               disabled={currentPage === totalPages}
-              className="button-glow rounded-xl border border-slate-200 bg-white p-2 text-slate-500 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-[#1E2D45] dark:bg-[#0D1421] dark:hover:bg-[#111B2B]"
+              className="button-glow min-h-11 min-w-11 rounded-xl border border-slate-200 bg-white p-2 text-slate-500 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-[#1E2D45] dark:bg-[#0D1421] dark:hover:bg-[#111B2B]"
             >
               <ChevronRight className="h-4 w-4" />
             </button>

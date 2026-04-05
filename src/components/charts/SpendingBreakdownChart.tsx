@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { PieChart as PieChartIcon } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import type { ValueType } from "recharts/types/component/DefaultTooltipContent";
@@ -19,6 +19,16 @@ function toTooltipNumber(value: ValueType | undefined) {
 export function SpendingBreakdownChart() {
   const { transactions } = useAppContext();
   const { resolvedTheme } = useTheme();
+  const [isCompactChart, setIsCompactChart] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1279px)");
+    const updateSize = () => setIsCompactChart(mediaQuery.matches);
+
+    updateSize();
+    mediaQuery.addEventListener("change", updateSize);
+    return () => mediaQuery.removeEventListener("change", updateSize);
+  }, []);
 
   const data = useMemo(() => {
     // Let's filter to only expenses of the current month
@@ -65,23 +75,23 @@ export function SpendingBreakdownChart() {
   }
 
   return (
-    <div className="app-panel col-span-1 flex h-[400px] flex-col p-6">
+    <div className="app-panel col-span-1 flex h-[400px] flex-col overflow-hidden p-6">
       <div className="mb-6">
         <span className="section-kicker">Allocation</span>
         <h3 className="mt-3 text-lg font-semibold tracking-tight text-[var(--text-primary)]">Spending Breakdown</h3>
       </div>
       
-      <div className="flex-1 flex flex-col sm:flex-row items-center w-full gap-4 overflow-hidden">
+      <div className="flex flex-1 flex-col gap-4 overflow-hidden xl:flex-row xl:items-center">
         {/* Chart */}
-        <div className="w-full sm:w-1/2 h-[200px] relative shrink-0">
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="relative min-h-[250px] w-full shrink-0 xl:w-1/2">
+          <ResponsiveContainer width="100%" minHeight={250}>
             <PieChart>
               <Pie
                 data={data}
                 cx="50%"
                 cy="50%"
-                innerRadius={60}
-                outerRadius={80}
+                innerRadius={isCompactChart ? 48 : 60}
+                outerRadius={isCompactChart ? 66 : 80}
                 paddingAngle={5}
                 dataKey="value"
                 stroke="none"
@@ -109,11 +119,11 @@ export function SpendingBreakdownChart() {
         </div>
         
         {/* Legend */}
-        <div className="w-full sm:w-1/2 flex flex-col gap-3 overflow-y-auto max-h-[160px] sm:max-h-[200px] custom-scrollbar pr-2 min-w-0">
+        <div className="grid w-full min-w-0 grid-cols-1 gap-3 overflow-y-auto pr-2 custom-scrollbar xl:max-h-[250px] xl:w-1/2">
           {data.map((item, index) => {
             const percentage = ((item.value / totalExpense) * 100).toFixed(1);
             return (
-              <div key={item.name} className="flex items-center justify-between text-sm flex-shrink-0 pr-1">
+              <div key={item.name} className="flex min-w-0 items-center justify-between gap-3 text-sm pr-1">
                 <div className="flex items-center gap-2 min-w-0">
                   <div 
                     className="w-3 h-3 rounded-full shrink-0" 
