@@ -167,10 +167,16 @@ export function InsightCards() {
 
   if (transactions.length === 0) {
     return (
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col items-center justify-center col-span-1 min-h-[300px]">
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6 self-start">Smart Insights</h3>
+      <div className="app-panel col-span-1 flex min-h-[300px] flex-col items-center justify-center p-6">
+        <h3 className="mb-6 self-start text-lg font-semibold tracking-tight text-[var(--text-primary)]">Smart Insights</h3>
         <div className="flex-1 flex items-center justify-center w-full">
-          <p className="text-slate-500 dark:text-slate-400">Not enough data to generate insights.</p>
+          <div className="flex max-w-sm flex-col items-center text-center">
+            <div className="mb-4 rounded-full bg-blue-500/10 p-4 text-blue-500">
+              <Zap className="h-8 w-8" />
+            </div>
+            <p className="text-lg font-semibold text-[var(--text-primary)]">Not enough data to generate insights</p>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Add more transactions to unlock trend analysis and category intelligence.</p>
+          </div>
         </div>
       </div>
     );
@@ -180,20 +186,30 @@ export function InsightCards() {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {insights.map((insight, idx) => {
         const Icon = insight.icon;
+        const isTopCategory = insight.title === "Top Category";
+        const percentageText = insight.description.split("%")[0];
         return (
-          <div key={idx} className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 shadow-sm relative overflow-hidden group">
-            {/* Background decoration */}
-            <div className={`absolute -right-6 -top-6 w-24 h-24 rounded-full opacity-20 group-hover:scale-150 transition-transform duration-500 ${insight.colorClass.split(' ')[0].replace('text-', 'bg-')}`} />
+          <div key={idx} className="app-panel group relative overflow-hidden p-6">
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-blue-500 via-blue-400/50 to-transparent" />
+            <Icon className={`absolute bottom-4 right-4 h-20 w-20 opacity-10 ${insight.colorClass.split(' ')[0]}`} />
             
             <div className="flex items-start gap-4 relative z-10">
-              <div className={`p-3 rounded-xl ${insight.bgClass}`}>
+              <div className={`rounded-2xl p-3 ${insight.bgClass}`}>
                 <Icon className={`h-6 w-6 ${insight.colorClass.split(' ')[0]}`} />
               </div>
               <div>
-                <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{insight.title}</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">{insight.title}</p>
                 <div className="mt-1 flex items-baseline gap-2">
-                  <span className={insight.colorClass}>{insight.value}</span>
+                  <span className={`${insight.colorClass} value-tabular`}>{insight.value}</span>
                 </div>
+                {isTopCategory && (
+                  <div className="mt-3 h-2 w-full max-w-44 overflow-hidden rounded-full bg-slate-200/80 dark:bg-white/10">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-500"
+                      style={{ width: `${Number.parseFloat(percentageText) || 0}%` }}
+                    />
+                  </div>
+                )}
                 <p className="mt-2 text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
                   {insight.description}
                 </p>

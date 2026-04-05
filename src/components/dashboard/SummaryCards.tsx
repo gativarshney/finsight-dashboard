@@ -85,24 +85,24 @@ export function SummaryCards() {
       value: formatCurrency(metrics.balance),
       trend: metrics.balanceTrend,
       icon: Wallet,
-      color: "text-indigo-500",
-      bgClass: "bg-indigo-500/10",
+      color: "text-blue-500",
+      bgClass: "bg-blue-500/10",
     },
     {
       title: "Monthly Income",
       value: formatCurrency(metrics.currentIncome),
       trend: metrics.incomeTrend,
       icon: DollarSign,
-      color: "text-emerald-500",
-      bgClass: "bg-emerald-500/10",
+      color: "text-cyan-500",
+      bgClass: "bg-cyan-500/10",
     },
     {
       title: "Monthly Expenses",
       value: formatCurrency(metrics.currentExpense),
       trend: metrics.expenseTrend,
       icon: CreditCard,
-      color: "text-rose-500",
-      bgClass: "bg-rose-500/10",
+      color: "text-red-500",
+      bgClass: "bg-red-500/10",
       invertTrend: true, // Higher expense -> 'bad' (red arrow), wait, generally expense up means red.
     },
     {
@@ -110,8 +110,8 @@ export function SummaryCards() {
       value: `${metrics.savingsRate.toFixed(1)}%`,
       trend: null, // Just show static rate or we could calculate trend
       icon: TrendingUp,
-      color: "text-sky-500",
-      bgClass: "bg-sky-500/10",
+      color: "text-cyan-500",
+      bgClass: "bg-cyan-500/10",
     },
   ];
 
@@ -134,22 +134,39 @@ export function SummaryCards() {
         return (
           <div
             key={idx}
-            className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 shadow-sm transition-all hover:shadow-md"
+            className="app-panel group relative overflow-hidden p-6 transition-all hover:-translate-y-0.5"
           >
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-blue-500 via-blue-400/50 to-transparent" />
             <div className="flex items-center justify-between mb-4">
-              <div className={`p-3 rounded-xl ${card.bgClass}`}>
+              <div className={`rounded-2xl p-3 ${card.bgClass}`}>
                 <Icon className={`h-6 w-6 ${card.color}`} />
               </div>
               {card.trend !== null && (
-                <div className={`flex items-center space-x-1 text-sm font-semibold px-2 py-1 rounded-full ${isUp ? 'bg-emerald-50 dark:bg-emerald-500/10' : 'bg-rose-50 dark:bg-rose-500/10'} ${trendColor}`}>
+                <div className={`flex items-center space-x-1 rounded-full border px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.18em] ${isUp ? 'border-cyan-500/20 bg-cyan-500/10' : 'border-red-500/20 bg-red-500/10'} ${trendColor}`}>
                   {isUp ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
                   <span>{trendValue}</span>
                 </div>
               )}
             </div>
             <div>
-              <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">{card.title}</p>
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{card.value}</h3>
+              <p className="mb-1 text-xs font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">{card.title}</p>
+              <h3 className="value-tabular text-2xl font-bold tracking-tight text-[var(--text-primary)]">{card.value}</h3>
+            </div>
+            <div className="mt-5">
+              <svg viewBox="0 0 120 24" className="h-7 w-full">
+                <path
+                  d={card.trend === null
+                    ? "M2 16 C26 16, 42 16, 58 16 S88 16, 118 16"
+                    : isUp
+                      ? "M2 18 C18 18, 28 15, 42 14 S68 10, 82 9 S102 8, 118 6"
+                      : "M2 7 C18 7, 30 9, 44 11 S66 15, 82 16 S102 18, 118 19"}
+                  fill="none"
+                  stroke={idx === 0 ? "#3B82F6" : idx === 1 ? "#06B6D4" : idx === 2 ? "#EF4444" : "#06B6D4"}
+                  strokeOpacity="0.8"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
             </div>
           </div>
         );

@@ -27,6 +27,7 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
 
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (transactionToEdit) {
       setType(transactionToEdit.type);
@@ -46,6 +47,7 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
     }
     setError("");
   }, [transactionToEdit, isOpen]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   if (!isOpen) return null;
 
@@ -89,38 +91,38 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
   return (
     <>
       <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm dark:bg-slate-900/80" onClick={onClose} />
-      <div className="fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden flex flex-col max-h-[90vh]">
+      <div className="fixed left-1/2 top-1/2 z-50 flex max-h-[90vh] w-full max-w-lg -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-[1.75rem] border border-[color:var(--card-border)] bg-[var(--card)] shadow-[0_24px_60px_rgba(15,23,42,0.32)]">
         
-        <div className="flex items-center justify-between p-6 border-b border-slate-100 dark:border-slate-700">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+        <div className="flex items-center justify-between border-b border-[color:var(--card-border)] p-6">
+          <h2 className="text-xl font-semibold tracking-tight text-[var(--text-primary)]">
             {transactionToEdit ? "Edit Transaction" : "New Transaction"}
           </h2>
-          <button onClick={onClose} className="p-2 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
+          <button onClick={onClose} className="button-glow rounded-xl border border-slate-200 bg-white p-2 text-slate-400 hover:bg-slate-50 dark:border-[#1E2D45] dark:bg-[#0D1421] dark:hover:bg-[#111B2B]">
             <X className="h-5 w-5" />
           </button>
         </div>
 
         <div className="p-6 overflow-y-auto custom-scrollbar">
           {error && (
-            <div className="mb-4 p-3 bg-rose-50 text-rose-600 dark:bg-rose-500/10 dark:text-rose-400 text-sm font-medium rounded-lg border border-rose-200 dark:border-rose-500/20">
+            <div className="mb-4 rounded-2xl border border-red-500/20 bg-red-500/10 p-3 text-sm font-medium text-red-500">
               {error}
             </div>
           )}
 
           <form id="tx-form" onSubmit={handleSubmit} className="space-y-4">
             
-            <div className="flex bg-slate-100 dark:bg-slate-900 p-1 rounded-xl">
+            <div className="flex rounded-2xl bg-slate-100 p-1 dark:bg-[#09101B]">
               <button
                 type="button"
                 onClick={() => handleTypeChange("expense")}
-                className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-colors ${type === "expense" ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"}`}
+                className={`button-glow flex-1 rounded-xl py-2 text-sm font-semibold transition-colors ${type === "expense" ? "bg-white text-slate-900 shadow-sm dark:bg-[#0D1421] dark:text-white" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"}`}
               >
                 Expense
               </button>
               <button
                 type="button"
                 onClick={() => handleTypeChange("income")}
-                className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-colors ${type === "income" ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"}`}
+                className={`button-glow flex-1 rounded-xl py-2 text-sm font-semibold transition-colors ${type === "income" ? "bg-white text-slate-900 shadow-sm dark:bg-[#0D1421] dark:text-white" : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"}`}
               >
                 Income
               </button>
@@ -136,7 +138,7 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
                     step="0.01"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-full pl-7 pr-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="value-tabular w-full rounded-2xl border border-slate-200 bg-slate-50 py-2.5 pl-7 pr-4 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
                     placeholder="0.00"
                   />
                 </div>
@@ -148,7 +150,7 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
                 />
               </div>
             </div>
@@ -158,7 +160,7 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
               <select 
                 value={category}
                 onChange={(e) => setCategory(e.target.value as Category)}
-                className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
               >
                 {ALL_CATEGORIES[type].map((cat) => (
                   <option key={cat} value={cat}>{cat}</option>
@@ -172,7 +174,7 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
                 type="text"
                 value={merchant}
                 onChange={(e) => setMerchant(e.target.value)}
-                className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
                 placeholder="e.g. Amazon"
               />
             </div>
@@ -183,7 +185,7 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
                 type="text"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-[#1E2D45] dark:bg-[#09101B] dark:text-white"
                 placeholder="e.g. Office supplies"
               />
             </div>
@@ -191,18 +193,18 @@ export function TransactionModal({ isOpen, onClose, transactionToEdit }: Transac
           </form>
         </div>
 
-        <div className="p-6 border-t border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex justify-end gap-3 mt-auto">
+        <div className="mt-auto flex justify-end gap-3 border-t border-[color:var(--card-border)] bg-slate-50/80 p-6 dark:bg-[#0B1220]">
           <button 
             type="button" 
             onClick={onClose}
-            className="px-5 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl transition-colors"
+            className="button-glow rounded-full px-5 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-[#111B2B]"
           >
             Cancel
           </button>
           <button 
             type="submit" 
             form="tx-form"
-            className="px-5 py-2.5 text-sm font-semibold bg-indigo-600 text-white rounded-xl shadow-sm hover:bg-indigo-700 hover:shadow transition-all"
+            className="button-glow rounded-full border border-blue-400/40 bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_34px_rgba(59,130,246,0.3)] hover:bg-blue-500"
           >
             {transactionToEdit ? "Save Changes" : "Add Transaction"}
           </button>

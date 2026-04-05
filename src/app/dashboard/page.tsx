@@ -6,9 +6,10 @@ import { RecentTransactions } from "@/components/dashboard/RecentTransactions";
 export default function DashboardPage() {
   return (
     <div className="space-y-6 max-w-7xl mx-auto w-full overflow-hidden">
-      <header className="mb-6 sm:mb-8 px-0">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Overview</h2>
-        <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-1">Here&apos;s your financial summary and recent activity.</p>
+      <header className="page-header mb-6 sm:mb-8 px-0">
+        <span className="section-kicker">Portfolio Snapshot</span>
+        <h2 className="mt-3 text-2xl sm:text-3xl font-semibold tracking-tight text-[var(--text-primary)]">Overview</h2>
+        <p className="mt-1 text-sm sm:text-base text-slate-500 dark:text-slate-400">Here&apos;s your financial summary and recent activity.</p>
       </header>
 
       {/* Top 4 KPI Cards */}

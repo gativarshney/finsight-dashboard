@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { AppProvider } from "@/context/AppContext";
 import { AppShell } from "@/components/layout/AppShell";
 import { Toaster } from "react-hot-toast";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "FinSight Dashboard",
@@ -23,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased selection:bg-indigo-500/30`}>
+      <body className="antialiased selection:bg-blue-500/30">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -35,7 +32,7 @@ export default function RootLayout({
             <Toaster 
               position="top-right" 
               toastOptions={{ 
-                className: 'dark:bg-slate-800 dark:text-white border dark:border-slate-700' 
+                className: "border border-slate-200 bg-white text-slate-900 shadow-lg dark:border-[#1E2D45] dark:bg-[#0D1421] dark:text-[#F0F4FF]" 
               }} 
             />
           </AppProvider>
