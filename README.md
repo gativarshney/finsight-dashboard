@@ -2,7 +2,21 @@
 
 Welcome to **FinSight**, a modern, production-quality finance dashboard that I built to manage and visualize mock financial data with elegance and precision.  
 
-🔗 **Live Demo:** [Placeholder for Live Demo Link]
+## 📸 Screenshots
+
+- **Dashboard (Dark Mode)**
+<img width="1892" height="859" alt="image" src="https://github.com/user-attachments/assets/834832cd-aa3d-4f25-a999-ff21d123900c" />
+
+- **Dashboard (Light Mode)**
+<img width="1918" height="863" alt="image" src="https://github.com/user-attachments/assets/de668cbb-e948-4960-bb42-a6bae9c46ca3" />
+
+- **Transaction Page**
+<img width="1920" height="1245" alt="image" src="https://github.com/user-attachments/assets/2fd9469b-32cc-4d20-8e3b-94137eaba167" />
+
+- **Insights Page**
+<img width="1920" height="1245" alt="image" src="https://github.com/user-attachments/assets/cb9277e3-861f-4e80-9572-b418cd804d2a" />
+
+🔗 **Live Demo:** 
 
 ---
 
@@ -98,15 +112,6 @@ I used **Indigo** as the primary interactive accent, paired with **Emerald/Rose*
 
 ---
 
-## 📸 Screenshots
 
-*(Add screenshots here)*
 
-- **Dashboard (Dark Mode)**
-  `![Dashboard Dark](placeholder-url-dark)`
 
-- **Transactions Table (Light Mode)**
-  `![Transactions Table](placeholder-url-light)`
-
-- **Add Transaction Modal**
-  `![Add Modal](placeholder-url-modal)`
