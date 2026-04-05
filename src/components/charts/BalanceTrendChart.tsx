@@ -62,7 +62,7 @@ export function BalanceTrendChart() {
                 boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                 color: isDark ? "#f8fafc" : "#0f172a"
               }}
-              formatter={(value: number) => [formatCurrency(value), "Balance"]}
+              formatter={(value: any) => [formatCurrency(Number(value) || 0), "Balance"]}
               itemStyle={{ color: strokeColor, fontWeight: 600 }}
             />
             <Area
