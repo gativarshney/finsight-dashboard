@@ -153,7 +153,7 @@ export function InsightCards() {
         title: "Largest Transaction",
         value: formatCurrency(biggestTx.amount),
         description: `Spent at ${biggestTx.merchant} this month`,
-        icon: LucideIcon => <span className="font-ex">tx</span>, // using generic custom icon if prefer
+        icon: TrendingDown,
         colorClass: "text-rose-500 font-bold text-xl",
         bgClass: "bg-rose-50 dark:bg-rose-500/10"
       }
