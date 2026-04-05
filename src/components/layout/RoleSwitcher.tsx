@@ -15,31 +15,28 @@ export function RoleSwitcher() {
           {initials}
         </div>
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between gap-2">
             <p className="truncate text-sm font-semibold text-[var(--text-primary)]">Workspace User</p>
-            <span className="rounded-full border border-cyan-500/20 bg-cyan-500/12 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.24em] text-cyan-500">
-              {role}
-            </span>
+            <div className="relative">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5">
+                {role === "Admin" ? (
+                  <Shield className="h-3.5 w-3.5 text-blue-500" />
+                ) : (
+                  <User className="h-3.5 w-3.5 text-cyan-500" />
+                )}
+              </div>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value as Role)}
+                className="appearance-none rounded-full border border-cyan-500/20 bg-cyan-500/12 py-1 pl-7 pr-7 text-[10px] font-semibold uppercase tracking-[0.24em] text-cyan-500 outline-none cursor-pointer"
+              >
+                <option value="Viewer" className="dark:bg-slate-800">Viewer</option>
+                <option value="Admin" className="dark:bg-slate-800">Admin</option>
+              </select>
+            </div>
           </div>
           <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Access level</p>
         </div>
-      </div>
-      <div className="mt-3 flex items-center gap-2 rounded-full border border-blue-500/10 bg-blue-500/5 p-1.5">
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm dark:bg-white/5">
-          {role === "Admin" ? (
-            <Shield className="h-4 w-4 text-blue-500" />
-          ) : (
-            <User className="h-4 w-4 text-cyan-500" />
-          )}
-        </div>
-        <select
-          value={role}
-          onChange={(e) => setRole(e.target.value as Role)}
-          className="w-full appearance-none bg-transparent pr-3 text-sm font-semibold text-[var(--text-primary)] outline-none cursor-pointer"
-        >
-          <option value="Viewer" className="dark:bg-slate-800">Viewer</option>
-          <option value="Admin" className="dark:bg-slate-800">Admin</option>
-        </select>
       </div>
     </div>
   );

@@ -8,18 +8,6 @@ import { groupByCategory, formatCurrency } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import { subMonths, isAfter } from "date-fns";
 
-const CATEGORY_COLORS: Record<string, string> = {
-  "Food & Dining": "#3B82F6",
-  "Transport": "#06B6D4",
-  "Shopping": "#8B5CF6",
-  "Entertainment": "#F59E0B",
-  "Health": "#10B981",
-  "Utilities": "#EF4444",
-  "Rent": "#EC4899",
-  "Education": "#14B8A6",
-};
-
-// Fallback colors for unknown categories
 const COLORS = ["#3B82F6", "#06B6D4", "#8B5CF6", "#F59E0B", "#10B981", "#EF4444", "#EC4899", "#14B8A6"];
 
 export function SpendingBreakdownChart() {
@@ -95,7 +83,7 @@ export function SpendingBreakdownChart() {
                 {data.map((entry, index) => (
                   <Cell 
                     key={`cell-${index}`} 
-                    fill={CATEGORY_COLORS[entry.name] || COLORS[index % COLORS.length]} 
+                    fill={COLORS[index % COLORS.length]} 
                   />
                 ))}
               </Pie>
@@ -123,7 +111,7 @@ export function SpendingBreakdownChart() {
                 <div className="flex items-center gap-2 min-w-0">
                   <div 
                     className="w-3 h-3 rounded-full shrink-0" 
-                    style={{ backgroundColor: CATEGORY_COLORS[item.name] || COLORS[index % COLORS.length] }} 
+                    style={{ backgroundColor: COLORS[index % COLORS.length] }} 
                   />
                   <span className="text-slate-600 dark:text-slate-400 truncate" title={item.name}>
                     {item.name}
