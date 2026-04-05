@@ -11,7 +11,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const { isLoading } = useAppContext();
 
   return (
-    <div className="flex h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-50 overflow-hidden font-sans">
+    <div className="flex h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-50 overflow-hidden font-sans">
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
