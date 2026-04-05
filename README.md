@@ -2,6 +2,8 @@
 
 Welcome to **FinSight**, a modern, production-quality finance dashboard that I built to manage and visualize mock financial data with elegance and precision.  
 
+🔗 **Live Demo:** https://finsight-dashboard-xi.vercel.app/dashboard
+
 ## 📸 Screenshots
 
 - **Dashboard (Dark Mode)**
@@ -16,7 +18,6 @@ Welcome to **FinSight**, a modern, production-quality finance dashboard that I b
 - **Insights Page**
 <img width="1920" height="1245" alt="image" src="https://github.com/user-attachments/assets/cb9277e3-861f-4e80-9572-b418cd804d2a" />
 
-🔗 **Live Demo:** 
 
 ---
 
