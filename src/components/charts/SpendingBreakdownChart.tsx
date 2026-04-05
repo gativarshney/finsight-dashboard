@@ -5,6 +5,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { useAppContext } from "@/context/AppContext";
 import { groupByCategory, formatCurrency } from "@/lib/utils";
 import { useTheme } from "next-themes";
+import { subMonths, isAfter } from "date-fns";
 
 const CATEGORY_COLORS: Record<string, string> = {
   "Food & Dining": "#f59e0b", // amber
@@ -27,15 +28,14 @@ export function SpendingBreakdownChart() {
   const data = useMemo(() => {
     // Let's filter to only expenses of the current month
     const now = new Date();
-    const currentMonth = now.getMonth();
-    const currentYear = now.getFullYear();
+    const sixMonthsAgo = subMonths(now, 6);
 
-    const currentMonthExpenses = transactions.filter((tx) => {
+    const expenses = transactions.filter((tx) => {
       const txDate = new Date(tx.date);
-      return tx.type === "expense" && txDate.getMonth() === currentMonth && txDate.getFullYear() === currentYear;
+      return tx.type === "expense" && isAfter(txDate, sixMonthsAgo);
     });
 
-    const grouped = groupByCategory(currentMonthExpenses);
+    const grouped = groupByCategory(expenses);
     
     // Convert object to array for Recharts
     const chartData = Object.keys(grouped).map((key) => ({

@@ -53,7 +53,7 @@ const generateMockData = (): Transaction[] => {
 
   // Ensure systematic recurring transactions like Salary and Rent for last 6 months
   for (let monthOffset = 0; monthOffset < 6; monthOffset++) {
-    const d = subDays(today, monthOffset * 30 + 5);
+    const d = subDays(today, monthOffset * 28 + 1);
     
     // Add Salary
     transactions.push({

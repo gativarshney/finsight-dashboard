@@ -38,9 +38,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     // Basic setup from mock data as fallback
     let initialData = initialMockTransactions;
     
-    // Attempt to load from localStorage (requested in step 14, setting up groundwork now perfectly safely)
+    // Attempt to load from localStorage
     try {
-      const stored = localStorage.getItem("finsight_transactions");
+      const stored = localStorage.getItem("finsight_transactions_v2");
       if (stored) {
         initialData = JSON.parse(stored);
       }
@@ -62,7 +62,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   // Sync to local storage upon changes
   useEffect(() => {
     if (isMounted) {
-      localStorage.setItem("finsight_transactions", JSON.stringify(transactions));
+      localStorage.setItem("finsight_transactions_v2", JSON.stringify(transactions));
     }
   }, [transactions, isMounted]);
 

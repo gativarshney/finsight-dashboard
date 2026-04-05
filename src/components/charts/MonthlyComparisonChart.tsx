@@ -61,7 +61,7 @@ export function MonthlyComparisonChart() {
               cursor={{ fill: isDark ? "#334155" : "#f1f5f9" }}
               formatter={(value: any, name: any) => [
                 formatCurrency(Number(value) || 0), 
-                name === "income" ? "Income" : "Expenses"
+                String(name) === "Income" ? "Income" : "Expenses"
               ]}
               labelStyle={{ color: textColor, fontWeight: 500, marginBottom: "8px" }}
             />
