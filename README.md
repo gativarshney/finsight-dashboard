@@ -4,20 +4,29 @@ Welcome to **FinSight**, a modern, production-quality finance dashboard that I b
 
 🔗 **Live Demo:** https://finsight-dashboard-xi.vercel.app/dashboard
 
-## 📸 Screenshots
+## Screenshots Using GoFullPage Extension
 
-- **Dashboard (Dark Mode)**
-<img width="1892" height="859" alt="image" src="https://github.com/user-attachments/assets/834832cd-aa3d-4f25-a999-ff21d123900c" />
+### Dashboard (Dark Mode)
+<img width="1920" height="1776" alt="image" src="https://github.com/user-attachments/assets/d15349ef-1ace-4a3d-b06e-a8ed5eebe5e6" />
 
-- **Dashboard (Light Mode)**
-<img width="1918" height="863" alt="image" src="https://github.com/user-attachments/assets/de668cbb-e948-4960-bb42-a6bae9c46ca3" />
+### Dashboard (Light Mode)
+<img width="1920" height="1599" alt="image" src="https://github.com/user-attachments/assets/72564aef-8455-459d-a8c6-c9094ddea165" />
 
-- **Transaction Page**
-<img width="1920" height="1245" alt="image" src="https://github.com/user-attachments/assets/2fd9469b-32cc-4d20-8e3b-94137eaba167" />
+### Transactions - Viewer Role
+<img width="1920" height="1389" alt="image" src="https://github.com/user-attachments/assets/24026d58-8035-43fd-9bdd-6d2e520f8bfb" />
 
-- **Insights Page**
-<img width="1920" height="1245" alt="image" src="https://github.com/user-attachments/assets/cb9277e3-861f-4e80-9572-b418cd804d2a" />
+### Transactions - Admin Role
+<img width="1916" height="857" alt="image" src="https://github.com/user-attachments/assets/0019e52e-dc3b-46dd-9f0e-b5728442a8fc" />
+<img width="679" height="720" alt="image" src="https://github.com/user-attachments/assets/04c77e96-d35a-44da-95ba-0c5d2dcbe771" />
 
+*Admin role unlocks Add, Edit, and Delete controls*
+
+### Insights
+<img width="1920" height="1197" alt="image" src="https://github.com/user-attachments/assets/ce790593-33f6-4294-b047-740c91f436ed" />
+
+> **Tip for reviewers:** To see the Admin role in action, switch the role  
+> from the dropdown at the bottom of the sidebar from **Viewer → Admin**.  
+> This unlocks the Add Transaction button and Edit/Delete controls on each row.
 
 ---
 
